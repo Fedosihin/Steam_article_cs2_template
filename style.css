@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+.template__input {
+    display: block;
+    width: 70%;
+}
+
+.page {
+    max-width: 1600px;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+#blocks{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.block {
+    display: flex;
+    min-height: 100px;
+    /* border: 1px solid green; */
+}
+
+.template {
+    flex: 1;
+}
+
+.template__input {
+    display: block;
+}
+
+.template__input--subtitle {
+    min-height: 150px;
+
+}
+
+/* === ПРЕВЬЮ === */
+.preview {
+    flex-basis: 760px;
+    /* flex: 1; */
+}
+
+.preview__title {
+    display: inline;
+    font-weight: 600;
+    margin-right: 4px;
+}
+
+.preview__subtitle {
+    display: inline;
+}
+
+.preview__gallery {
+    margin-top: 16px;
+    display: flex;
+    margin-bottom: 8px;
+}
+
+.preview__img-1,
+.preview__img-2 {
+    width: 100%;
+}
+
+/* BUTTON */
+#create-block-btn {
+    display: block;
+    width: 100%;
+}
+
+#steam-html {
+    margin-top: 20px;
+    border: 1px solid green;
+    /* background-color: #fff; */
+    min-height: 100px;
+}

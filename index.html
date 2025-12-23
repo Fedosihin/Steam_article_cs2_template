@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="page">
+        <ul id="blocks">
+            <li class="block block-1">
+                <div class="template">
+                    <label>
+                        <input type="radio" name="answer" value="1">
+                        Вариант 1
+                    </label>
+                    <label>
+                        <input type="radio" name="answer" value="2">
+                        Вариант 2
+                    </label>
+                    <label>
+                        <input type="radio" name="answer" value="3">
+                        Вариант 3
+                    </label>
+                    <label>
+                        <input type="radio" name="answer" value="4">
+                        Вариант 4
+                    </label>
+                    <input class="template__input template__input--title" type="text" name="" placeholder="name" id="">
+                    <input class="template__input template__input--subtitle" type="text" name=""
+                        placeholder="description" id="">
+                    <input class="template__input" type="text" name="" placeholder="img url" id="">
+                    <input class="template__input" type="text" name="" placeholder="img url" id="">
+                    <input class="template__input" type="text" name="" placeholder="keys" id="">
+                </div>
+                <div class="preview">
+                    <p class="preview__title">title</p>
+                    <p class="preview__subtitle">subtitle</p>
+                    <div class="preview__gallery">
+                        <img src="" class="preview__img-1" alt="img1"><img src="" class="preview__img-2" alt="img2">
+                    </div>
+                    <p class="preview__keys">[ПКМ + ЛКМ]</p>
+                    <!-- <p class="preview__jump">[СТОЙ НА МЕСТЕ]</p> -->
+                </div>
+            </li>
+        </ul>
+        <!--  -->
+        <!-- <img src="https://images.steamusercontent.com/ugc/15314170301125144730/6C148A0ABC82FB2EA6B8D35BA24452912A0EB02B/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false" class="preview__img" alt="img1"></img> -->
+        <button id="create-block-btn">+</button>
+        <h2 style="text-align: center; margin-top: 80px;">Готовый код</h2>
+        <pre style="margin-bottom: 300px;" id="steam-html"></pre>
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>
