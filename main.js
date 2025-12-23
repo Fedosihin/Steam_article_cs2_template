@@ -2,6 +2,7 @@ const elements = {
     createBlockBtn: document.querySelector('#create-block-btn'),
     list: document.querySelector('#blocks'),
     html: document.querySelector('#steam-html'),
+    delete: document.querySelector('#delete-btn'),
 }
 
 
@@ -277,9 +278,19 @@ function createHTMLForSingleBlock(item, index) {
     return text;
 };
 
+elements.delete.addEventListener('click', function(event){
+    event.preventDefault();
+    if(confirm("ARE YOU SURE?")){
+        MOCKDATA = [];
+        saveState();
+        renderList();
+    }
+})
+
 function init() {
     loadState();
     renderList();
+    // renderHTML(); НЕ РАБОТАЕТ КАК НАДО 
     createSteamHTML();
 };
 init();
