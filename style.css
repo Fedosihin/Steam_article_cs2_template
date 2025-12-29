@@ -6,12 +6,18 @@
 
 body {
     font-family: sans-serif;
+    color: white;
+    background-color: black;
 }
 
 .template__input {
     display: block;
     width: 70%;
 }
+
+input[type="radio"] {
+    margin-right: 30px;
+} 
 
 .page {
     max-width: 1600px;
@@ -58,6 +64,11 @@ body {
 
 .preview__subtitle {
     display: inline;
+}
+
+.template__radio-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .preview__gallery {
