@@ -311,13 +311,13 @@ elements.list.addEventListener("input", function (event) {
         const li = input.closest('li');
         const p = li.querySelector('.preview__title');
         p.textContent = input.value; // тут меняется текст параграфа
-        MOCKDATA[li.dataset.id].title = input.value;
+        MOCKDATA[li.dataset.id].title = input.value.trim();
     }
     if (input.classList.contains('template__input--subtitle')) {
         const li = input.closest('li');
         const p = li.querySelector('.preview__subtitle');
         p.textContent = input.value; // тут меняется текст параграфа
-        MOCKDATA[li.dataset.id].subtitle = input.value;
+        MOCKDATA[li.dataset.id].subtitle = input.value.trim();
     }
     if (input.classList.contains('template__input--img-id')) {
         const li = input.closest('li');
@@ -333,14 +333,14 @@ elements.list.addEventListener("input", function (event) {
         img.src = steamImageHTMLToImageLink(input.value); // тут меняется текст параграфа
         // img.src = input.value; // тут меняется текст параграфа
         img.alt = "alt"; // тут меняется текст параграфа
-        MOCKDATA[li.dataset.id].images[0] = input.value;
+        MOCKDATA[li.dataset.id].images[0] = input.value.trim();
     }
     if (input.classList.contains('template__input--img-2')) {
         const li = input.closest('li');
         const img = li.querySelector('.preview__img-2');
         img.src = steamImageHTMLToImageLink(input.value); // тут меняется текст параграфа
         img.alt = "alt"; // тут меняется текст параграфа
-        MOCKDATA[li.dataset.id].images[1] = input.value;
+        MOCKDATA[li.dataset.id].images[1] = input.value.trim();
     }
     saveState();
 });
