@@ -49,7 +49,7 @@ function createRadio(container, itemValue) {
         input.type = 'radio';
         input.name = 'answer' + id;
         input.value = item.value;
-        input.classList.add("radio-icon");
+        input.classList.add("input-radio-icon");
         input.classList.add("template__icon");
 
         const text = document.createTextNode(' ' + item.text);
@@ -77,6 +77,7 @@ function createRadioMouse(container, itemValue) {
         input.type = 'radio';
         input.name = 'mouseButton' + id;
         input.value = item.text;
+        input.classList.add("input-radio-mousebytton");
         input.classList.add("template__mouse-button");
 
         const text = document.createTextNode(' ' + item.text);
@@ -104,6 +105,7 @@ function createRadioMovement(container, itemValue) {
         input.type = 'radio';
         input.name = 'movement' + id;
         input.value = item.text;
+        input.classList.add("input-radio-movement");
         input.classList.add("template__movement");
 
         const text = document.createTextNode(' ' + item.text);
@@ -227,10 +229,10 @@ function createTemplate(item) {
     img_1.value = item.images[0];
     img_1.placeholder = "ССЫЛКА НА КАРТИНКУ";
 
-    // const img_2 = document.createElement('input');
-    // img_2.classList.add('template__input--img-2');
-    // img_2.classList.add('template__input');
-    // img_2.value = item.images[1];
+    const img_2 = document.createElement('input');
+    img_2.classList.add('template__input--img-2');
+    img_2.classList.add('template__input');
+    img_2.value = item.images[1];
 
 
     // TODO добавить остальные инпуты
@@ -238,7 +240,7 @@ function createTemplate(item) {
     template.appendChild(subtitle);
     template.appendChild(imgId);
     template.appendChild(img_1);
-    // template.appendChild(img_2);
+    template.appendChild(img_2);
     return template;
 }
 
@@ -250,7 +252,7 @@ function createPreview(item) {
     // ICON
     const icon = document.createElement('span');
     icon.classList.add('preview__icon');
-    icon.textContent = `[${item.icon}] `;
+    icon.textContent = `${item.icon}`;
 
     // Mouse Button
     const mouseButton = document.createElement('div');
@@ -275,22 +277,18 @@ function createPreview(item) {
 
     const img_1 = document.createElement('img');
     img_1.classList.add('preview__img-1');
-    // img_1.src = item.images[0];
     img_1.src = steamImageHTMLToImageLink(item.images[0]);
-    // console.log(item.images[0]);
-    console.log("img src");
-    console.log(img_1.src);
+    img_1.alt = "image-1";
+    
+    const img_2 = document.createElement('img');
+    img_2.classList.add('preview__img-2');
+    img_2.src = steamImageHTMLToImageLink(item.images[1]);
+    img_2.alt = "image-2";
 
-    img_1.alt = "image";
-
-    // const img_2 = document.createElement('img');
-    // img_2.classList.add('preview__img-2');
-    // img_2.src = item.images[1];
-    // img_2.alt = "right img";
 
     // Gallery
     gallery.appendChild(img_1);
-    // gallery.appendChild(img_2);
+    gallery.appendChild(img_2);
 
 
 
@@ -337,16 +335,14 @@ elements.list.addEventListener("input", function (event) {
         img.alt = "alt"; // тут меняется текст параграфа
         MOCKDATA[li.dataset.id].images[0] = input.value;
     }
-    // if (input.classList.contains('template__input--img-2')) {
-    //     const li = input.closest('li');
-    //     const img = li.querySelector('.preview__img-2');
-    //     console.log(img);
-    //     img.src = input.value; // тут меняется текст параграфа
-    //     img.alt = input.value; // тут меняется текст параграфа
-    //     MOCKDATA[li.dataset.id].images[1] = input.value;
-    // }
+    if (input.classList.contains('template__input--img-2')) {
+        const li = input.closest('li');
+        const img = li.querySelector('.preview__img-2');
+        img.src = steamImageHTMLToImageLink(input.value); // тут меняется текст параграфа
+        img.alt = "alt"; // тут меняется текст параграфа
+        MOCKDATA[li.dataset.id].images[1] = input.value;
+    }
     saveState();
-    // renderList();
 });
 
 // ДЕЛЕГИРОВАНИЕ РАДИО ДВИЖЕНИЯ
@@ -354,7 +350,7 @@ elements.list.addEventListener('change', (event) => {
     const target = event.target;
     const li = target.closest('li');
 
-    if (target.matches('input[type="radio"]')) {
+    if (target.matches('input[type="radio"].input-radio-movement')) {
         console.log('Выбрано значение для движения:', target.value);
         // Вставить
         const movement = li.querySelector('.preview__movement');
@@ -369,7 +365,7 @@ elements.list.addEventListener('change', (event) => {
     const target = event.target;
     const li = target.closest('li');
 
-    if (target.matches('input[type="radio"]')) {
+    if (target.matches('input[type="radio"].input-radio-mousebytton')) {
         console.log('Выбрано значение для кнопки мыши:', target.value);
         // Вставить
         const mouseButton = li.querySelector('.preview__mouse-button');
@@ -385,7 +381,7 @@ elements.list.addEventListener('change', (event) => {
     const target = event.target;
     const li = target.closest('li');
 
-    if (target.matches('input[type="radio"]')) {
+    if (target.matches('input[type="radio"].input-radio-icon')) {
         console.log('Выбрано значение:', target.value);
         const icon = li.querySelector('.preview__icon');
         icon.textContent = `[${target.value}] `;
@@ -423,6 +419,7 @@ function createHTMLForSingleBlock(item, index) {
     text += `\n`;
     // Картинка
     text += item.images[0] ? `${item.images[0]}\n` : `ТУТ ДОЛЖНА БЫТЬ КАРТИНКА\n`;
+    text += item.images[1] ? `${item.images[1]}\n` : ``;
     // if (item.imageId && item.images[0]) {
     // text += `\n[screenshot=${item.imageId};sizeFull,inline;${item.images[0]}][/screenshot]\n`;
     // } else {
@@ -444,9 +441,17 @@ elements.delete.addEventListener('click', function (event) {
     }
 })
 
-elements.createHTMLButton.addEventListener('click', function (event) {
+elements.createHTMLButton.addEventListener('click', async function (event) {
     event.preventDefault();
     createSteamHTML();
+    const text = elements.html.textContent; // или textContent
+    try {
+        await navigator.clipboard.writeText(text);
+        elements.createHTMLButton.textContent = 'Скопировано!  ! ! ';
+        setTimeout(() => (elements.createHTMLButton.textContent = 'Скопировать код'), 1500);
+    } catch (err) {
+        console.error('Не удалось скопировать: ', err);
+    }
 })
 
 function steamImageHTMLToImageLink(string) {

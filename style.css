@@ -56,6 +56,10 @@ input[type="radio"] {
     /* flex: 1; */
 }
 
+.preview__icon {
+    margin-right: 6px;
+}
+
 .preview__title {
     display: inline;
     font-weight: 600;
@@ -63,7 +67,8 @@ input[type="radio"] {
 }
 
 .preview__subtitle {
-    display: inline;
+    display: block;
+    margin-bottom: 10px;
 }
 
 .template__radio-container {
@@ -73,13 +78,23 @@ input[type="radio"] {
 
 .preview__gallery {
     margin-top: 16px;
-    display: flex;
+    /* display: flex; */
     margin-bottom: 8px;
+}
+
+#create-html-btn {
+    align-items: center;
+    display: block;
+    padding: 10px;
+    margin: 0 auto;
 }
 
 .preview__img-1,
 .preview__img-2 {
-    width: 100%;
+    /* width: 100%; */
+    display: block;
+    height: 150px;
+    margin-bottom: 5px;
 }
 
 /* BUTTON */
