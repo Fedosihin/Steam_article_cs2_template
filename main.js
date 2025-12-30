@@ -17,6 +17,7 @@ const answers = [
     { value: '💣', text: '💣' },
     { value: '🌟', text: '🌟' },
     { value: '🔥', text: '🔥' },
+    { value: '🐀', text: '🐀' },
 ];
 
 const mouseButtons = [
@@ -30,6 +31,7 @@ const movement = [
     { value: '1', text: 'Прыжок' },
     { value: '2', text: 'Прыжок + Вперёд' },
     { value: '3', text: 'Вперёд' },
+    { value: '3', text: 'Shift + Вперёд' },
     { value: '4', text: 'Другое' },
 ];
 
@@ -227,12 +229,12 @@ function createTemplate(item) {
     img_1.classList.add('template__input--img-1');
     img_1.classList.add('template__input');
     img_1.value = item.images[0];
-    img_1.placeholder = "ССЫЛКА НА КАРТИНКУ";
-    
+    img_1.placeholder = "ССЫЛКА НА КАРТИНКУ. КУДА ЦЕЛИТЬСЯ";
+
     const img_2 = document.createElement('input');
     img_2.classList.add('template__input--img-2');
     img_2.classList.add('template__input');
-    img_2.placeholder = "ССЫЛКА НА ВТОРУЮ КАРТИНКУ (ЕСЛИ НАДО)";
+    img_2.placeholder = "ССЫЛКА НА ВТОРУЮ КАРТИНКУ (ЕСЛИ НАДО). КУДА ВСТАВАТЬ";
     img_2.value = item.images[1];
 
 
@@ -280,7 +282,7 @@ function createPreview(item) {
     img_1.classList.add('preview__img-1');
     img_1.src = steamImageHTMLToImageLink(item.images[0]);
     img_1.alt = "image-1";
-    
+
     const img_2 = document.createElement('img');
     img_2.classList.add('preview__img-2');
     img_2.src = steamImageHTMLToImageLink(item.images[1]);
@@ -311,14 +313,19 @@ elements.list.addEventListener("input", function (event) {
     if (input.classList.contains('template__input--title')) {
         const li = input.closest('li');
         const p = li.querySelector('.preview__title');
-        p.textContent = input.value; // тут меняется текст параграфа
-        MOCKDATA[li.dataset.id].title = input.value.trim();
+        // p.textContent = input.value; // тут меняется текст параграфа
+        let text = input.value.trim();
+        text = text.charAt(0).toUpperCase() + text.slice(1);
+        p.textContent = text; // тут меняется текст параграфа
+        MOCKDATA[li.dataset.id].title = text;
     }
     if (input.classList.contains('template__input--subtitle')) {
         const li = input.closest('li');
         const p = li.querySelector('.preview__subtitle');
-        p.textContent = input.value; // тут меняется текст параграфа
-        MOCKDATA[li.dataset.id].subtitle = input.value.trim();
+        let text = input.value.trim();
+        text = text.charAt(0).toUpperCase() + text.slice(1);
+        p.textContent = text; // тут меняется текст параграфа
+        MOCKDATA[li.dataset.id].subtitle = text;
     }
     if (input.classList.contains('template__input--img-id')) {
         const li = input.closest('li');
@@ -385,7 +392,7 @@ elements.list.addEventListener('change', (event) => {
     if (target.matches('input[type="radio"].input-radio-icon')) {
         console.log('Выбрано значение:', target.value);
         const icon = li.querySelector('.preview__icon');
-        icon.textContent = `[${target.value}] `;
+        icon.textContent = `${target.value} `;
         MOCKDATA[li.dataset.id].icon = target.value;
     }
     saveState();
@@ -401,11 +408,6 @@ function createSteamHTML() {
 
 function createHTMLForSingleBlock(item, index) {
     let text = ``;
-    // Иконка
-    // text += `${item.icon} `;
-    // Текст
-    // text += `[b]${item.title}:[/b] ${item.subtitle} \n\n`;
-
     // Заголовок
     text += `[h1]${item.icon} ${item.title}[/h1]\n`;
     // Описание
@@ -413,23 +415,19 @@ function createHTMLForSingleBlock(item, index) {
     // Воздух
     text += `\n`;
     // Мышь
-    text += `Мышь: ${item.mouseButton} \n`;
+    text += item.mouseButton ? `Мышь: ${item.mouseButton} \n` : ``;
     // Движение
-    text += `Движение: ${item.movement} \n`;
+    text += item.movement ? `Движение: ${item.movement} \n` : ``;
     // Воздух
     text += `\n`;
+    // Начало галереи
+    text += `[table]\n`;
     // Картинка
-    text += item.images[0] ? `${item.images[0]}\n` : `ТУТ ДОЛЖНА БЫТЬ КАРТИНКА\n`;
-    text += item.images[1] ? `${item.images[1]}\n` : ``;
-    // if (item.imageId && item.images[0]) {
-    // text += `\n[screenshot=${item.imageId};sizeFull,inline;${item.images[0]}][/screenshot]\n`;
-    // } else {
-    // text += `ОШИБКА ВСТАВКИ КАРТИНКИ\n`;
-    // }
-    // Обязательный разделитель
+    text += item.images[0] ? `[tr][td]${item.images[0]}[/td][/tr]\n` : `ТУТ ДОЛЖНА БЫТЬ КАРТИНКА\n`;
+    text += item.images[1] ? `[tr][td]${item.images[1]}[/td][/tr]\n` : ``;
+    // Конец галереи
+    text += `[/table]\n`;
     text += `[hr][/hr]\n`;
-    // Воздух
-    text += `\n`;
     return text;
 };
 
