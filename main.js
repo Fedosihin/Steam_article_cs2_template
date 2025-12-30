@@ -127,7 +127,7 @@ elements.createBlockBtn.addEventListener('click', function (event) {
         title: "",
         subtitle: "",
         imageId: "",
-        images: ["", "src-2"],
+        images: ["", ""],
         keys: "[keys]",
     }
     MOCKDATA.push(newItem);
@@ -228,10 +228,11 @@ function createTemplate(item) {
     img_1.classList.add('template__input');
     img_1.value = item.images[0];
     img_1.placeholder = "ССЫЛКА НА КАРТИНКУ";
-
+    
     const img_2 = document.createElement('input');
     img_2.classList.add('template__input--img-2');
     img_2.classList.add('template__input');
+    img_2.placeholder = "ССЫЛКА НА ВТОРУЮ КАРТИНКУ (ЕСЛИ НАДО)";
     img_2.value = item.images[1];
 
 
